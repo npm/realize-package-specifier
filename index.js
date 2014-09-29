@@ -1,7 +1,7 @@
 "use strict"
-var fs = require('fs')
-var path = require('path')
-var dz = require('dezalgo')
+var fs = require("fs")
+var path = require("path")
+var dz = require("dezalgo")
 var npa = require("npm-package-arg")
 
 module.exports = function (spec, where, cb) {
@@ -14,12 +14,12 @@ module.exports = function (spec, where, cb) {
       if (er) return cb(null, dep)
       if (!s.isDirectory()) return dep.spec = spec, dep.type = "local", cb(null, dep)
       fs.stat(path.join(specpath, "package.json"), function (er) {
-          if (er) return cb(null, dep)
-          return dep.spec = spec, dep.type = "directory", cb(null, dep)
+        if (er) return cb(null, dep)
+        return dep.spec = spec, dep.type = "directory", cb(null, dep)
       })
     })
   }
   catch (e) {
-      return cb(e)
+    return cb(e)
   }
 }

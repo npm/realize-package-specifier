@@ -43,15 +43,15 @@ var rps = requireInject("../index", {
 test("realize-package-specifier", function (t) {
   t.plan(4)
   rps("a.tar.gz", function (err, result) {
-      t.is(result.type, 'local', 'local tarball')
+    t.is(result.type, "local", "local tarball")
   })
   rps("b", function (err, result) {
-      t.is(result.type, 'directory', 'local package directory')
+    t.is(result.type, "directory", "local package directory")
   })
   rps("c", function (err, result) {
-      t.is(result.type, 'range', 'remote package, non-package local directory')
+    t.is(result.type, "range", "remote package, non-package local directory")
   })
   rps("d", function (err, result) {
-      t.is(result.type, 'range', 'remote package, no local directory')
+    t.is(result.type, "range", "remote package, no local directory")
   })
 })
