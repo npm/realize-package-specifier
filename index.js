@@ -12,10 +12,10 @@ module.exports = function (spec, where, cb) {
     var specpath = path.resolve(where, dep.type == "local" ? dep.spec : spec)
     fs.stat(specpath, function (er, s) {
       if (er) return cb(null, dep)
-      if (!s.isDirectory()) return dep.spec = spec, dep.type = "local", cb(null, dep)
+      if (!s.isDirectory()) return dep.spec = specpath, dep.type = "local", cb(null, dep)
       fs.stat(path.join(specpath, "package.json"), function (er) {
         if (er) return cb(null, dep)
-        return dep.spec = spec, dep.type = "directory", cb(null, dep)
+        return dep.spec = specpath, dep.type = "directory", cb(null, dep)
       })
     })
   }
