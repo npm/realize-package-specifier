@@ -14,7 +14,9 @@ module.exports = function (spec, where, cb) {
   catch (e) {
     return cb(e)
   }
-  var specpath = path.resolve(where, dep.type == "local" ? dep.spec : spec)
+  var specpath = dep.type == "local"
+               ? path.resolve(where, dep.spec)
+               : path.resolve(spec)
   fs.stat(specpath, function (er, s) {
     if (er) return finalize()
     if (!s.isDirectory()) return finalize("local")
