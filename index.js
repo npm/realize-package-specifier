@@ -5,7 +5,7 @@ var dz = require("dezalgo")
 var npa = require("npm-package-arg")
 
 module.exports = function (spec, where, cb) {
-  if (where instanceof Function) cb = where, where = null
+  if (where instanceof Function) { cb = where; where = null }
   if (where == null) where = "."
   cb = dz(cb)
   try {
