@@ -25,7 +25,13 @@ module.exports = function (spec, where, cb) {
     })
   })
   function finalize(type) {
-    if (type != null) dep.type = type
+    if (type != null && type != dep.type) {
+      dep.type = type
+      if (! dep.rawSpec) {
+        dep.rawSpec = dep.name
+        dep.name = null
+      }
+    }
     if (dep.type == "local" || dep.type == "directory") dep.spec = specpath
     cb(null, dep)
   }
