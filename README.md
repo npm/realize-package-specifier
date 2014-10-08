@@ -41,7 +41,10 @@ The full definition of the result object is:
 * `name` - If known, the `name` field expected in the resulting pkg.
 * `type` - One of the following strings:
   * `git` - A git repo
-  * `github` - A github shorthand, like `user/project`
+  * `hosted` - A hosted project, from github, bitbucket or gitlab. Originally
+    either a full url pointing at one of these services or a shorthand like
+    `user/project` or `github:user/project` for github or `bitbucket:user/project`
+    for bitbucket.
   * `tag` - A tagged version, like `"foo@latest"`
   * `version` - A specific version number, like `"foo@1.2.3"`
   * `range` - A version range, like `"foo@2.x"`
@@ -49,6 +52,12 @@ The full definition of the result object is:
   * `directory` - A local package directory
   * `remote` - An http url (presumably to a tgz)
 * `spec` - The "thing".  URL, the range, git repo, etc.
+* `hosted` - If type=hosted this will be an object with the following keys:
+  * `type` - github, bitbucket or gitlab
+  * `ssh` - The ssh path for this git repo
+  * `sshurl` - The ssh URL for this git repo
+  * `https` - The HTTPS URL for this git repo
+  * `directUrl` - The URL for the package.json in this git repo
 * `raw` - The original un-modified string that was provided.
 * `rawSpec` - The part after the `name@...`, as it was originally
   provided.

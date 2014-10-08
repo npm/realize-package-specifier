@@ -53,7 +53,7 @@ var rps = requireInject("../index", {
 })
 
 test("realize-package-specifier", function (t) {
-  t.plan(10)
+  t.plan(11)
   rps("a.tar.gz", function (err, result) {
     t.is(result.type, "local", "local tarball")
   })
@@ -82,11 +82,12 @@ test("realize-package-specifier", function (t) {
     t.is(result.type, "directory", "local package directory")
   })
   rps("e/2", function (err, result) {
-    t.is(result.type, "github", "github package dependency")
+    t.is(result.type, "hosted", "hosted package dependency")
+    t.is(result.hosted.type, "github", "github package dependency")
   })
 })
 test("named realize-package-specifier", function (t) {
-  t.plan(10)
+  t.plan(11)
 
   rps("a@a.tar.gz", function (err, result) {
     t.is(result.type, "local", "named local tarball")
@@ -116,6 +117,7 @@ test("named realize-package-specifier", function (t) {
     t.is(result.type, "directory", "local package directory")
   })
   rps("e@e/2", function (err, result) {
-    t.is(result.type, "github", "github package dependency")
+    t.is(result.type, "hosted", "hosted package dependency")
+    t.is(result.hosted.type, "github", "github package dependency")
   })
 })
