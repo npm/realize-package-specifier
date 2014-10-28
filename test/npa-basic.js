@@ -64,12 +64,11 @@ test("npa-basic", function (t) {
       rawSpec: "=v1.2.3"
     },
 
-    "git+ssh://git@github.com/user/foo#1.2.3": {
+    "git+ssh://git@notgithub.com/user/foo#1.2.3": {
       name: null,
-      type: "hosted",
-      hosted: { type: "github" },
-      spec: "user/foo#1.2.3",
-      raw: "git+ssh://git@github.com/user/foo#1.2.3"
+      type: "git",
+      spec: "ssh://git@notgithub.com/user/foo#1.2.3",
+      raw: "git+ssh://git@notgithub.com/user/foo#1.2.3"
     },
 
     "git+file://path/to/repo#1.2.3": {
@@ -79,22 +78,19 @@ test("npa-basic", function (t) {
       raw: "git+file://path/to/repo#1.2.3"
     },
 
-    "git://github.com/user/foo": {
+    "git://notgithub.com/user/foo": {
       name: null,
-      type: "hosted",
-      hosted: { type: "github" },
-      spec: "user/foo",
-      raw: "git://github.com/user/foo"
+      type: "git",
+      spec: "git://notgithub.com/user/foo",
+      raw: "git://notgithub.com/user/foo"
     },
 
-    "@foo/bar@git+ssh://github.com/user/foo": {
+    "@foo/bar@git+ssh://notgithub.com/user/foo": {
       name: "@foo/bar",
-      type: "hosted",
-      hosted: { type: "github" },
       scope: "@foo",
-      spec: "user/foo",
-      rawSpec: "git+ssh://github.com/user/foo",
-      raw: "@foo/bar@git+ssh://github.com/user/foo"
+      spec: "ssh://notgithub.com/user/foo",
+      rawSpec: "git+ssh://notgithub.com/user/foo",
+      raw: "@foo/bar@git+ssh://notgithub.com/user/foo"
     },
 
     "/path/to/foo": {
@@ -107,21 +103,21 @@ test("npa-basic", function (t) {
     "file:path/to/foo": {
       name: null,
       type: "local",
-      spec: path.resolve(__dirname,"..","path/to/foo"),
+      spec: path.resolve("path/to/foo"),
       raw: "file:path/to/foo"
     },
 
     "file:~/path/to/foo": {
       name: null,
       type: "local",
-      spec: path.resolve(__dirname,"..","~/path/to/foo"),
+      spec: path.resolve("~/path/to/foo"),
       raw: "file:~/path/to/foo"
     },
 
     "file:../path/to/foo": {
       name: null,
       type: "local",
-      spec: path.resolve(__dirname,"..","../path/to/foo"),
+      spec: path.resolve("../path/to/foo"),
       raw: "file:../path/to/foo"
     },
 
@@ -137,46 +133,6 @@ test("npa-basic", function (t) {
       type: "remote",
       spec: "https://server.com/foo.tgz",
       raw: "https://server.com/foo.tgz"
-    },
-
-    "user/foo-js": {
-      name: null,
-      type: "hosted",
-      hosted: { type: "github" },
-      spec: "user/foo-js",
-      raw: "user/foo-js"
-    },
-
-    "user/foo-js#bar/baz": {
-      name: null,
-      type: "hosted",
-      hosted: { type: "github" },
-      spec: "user/foo-js#bar/baz",
-      raw: "user/foo-js#bar/baz"
-    },
-
-    "user..blerg--/..foo-js# . . . . . some . tags / / /": {
-      name: null,
-      type: "hosted",
-      hosted: { type: "github" },
-      spec: "user..blerg--/..foo-js# . . . . . some . tags / / /",
-      raw: "user..blerg--/..foo-js# . . . . . some . tags / / /"
-    },
-
-    "user/foo-js#bar/baz/bin": {
-      name: null,
-      type: "hosted",
-      hosted: { type: "github" },
-      spec: "user/foo-js#bar/baz/bin",
-      raw: "user/foo-js#bar/baz/bin"
-    },
-
-    "foo@user/foo-js": {
-      name: "foo",
-      type: "hosted",
-      hosted: { type: "github" },
-      spec: "user/foo-js",
-      raw: "foo@user/foo-js"
     },
 
     "foo@latest": {
@@ -198,9 +154,9 @@ test("npa-basic", function (t) {
 
   Object.keys(tests).forEach(function (arg) {
     rps(arg, path.resolve(__dirname,'..'), function(err, res) {
-      t.notOk(err, "No error")
-      t.type(res, "Result")
-      t.has(res, tests[arg])
+      t.notOk(err, arg + " no error")
+      t.type(res, "Result", arg + " got right result time")
+      t.has(res, tests[arg], arg + " result has correct values")
     })
   })
 
