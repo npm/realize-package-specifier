@@ -13,6 +13,8 @@ realizePackageSpecifier("foo.tar.gz", ".", function (err, package) {
 })
 ```
 
+## Using
+
 * realizePackageSpecifier(*spec*, [*where*,] *callback*)
 
 Parses *spec* using `npm-package-arg` and then uses stat to check to see if
@@ -34,7 +36,7 @@ new type of `directory`.  2) The `local` type only refers to tarballs.  2)
 For all `local` and `directory` type results spec will contain the full path of
 the local package.
 
-## Result Objects
+## Result Object
 
 The full definition of the result object is:
 
