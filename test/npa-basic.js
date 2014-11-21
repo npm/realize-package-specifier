@@ -99,28 +99,18 @@ test("npa-basic", function (t) {
       spec: "/path/to/foo",
       raw: "/path/to/foo"
     },
-
     "file:path/to/foo": {
       name: null,
       type: "local",
-      spec: path.resolve("path/to/foo"),
+      spec: path.resolve(__dirname,"..","path/to/foo"),
       raw: "file:path/to/foo"
     },
-
-    "file:~/path/to/foo": {
-      name: null,
-      type: "local",
-      spec: path.resolve("~/path/to/foo"),
-      raw: "file:~/path/to/foo"
-    },
-
     "file:../path/to/foo": {
       name: null,
       type: "local",
-      spec: path.resolve("../path/to/foo"),
+      spec: path.resolve(__dirname,"..","../path/to/foo"),
       raw: "file:../path/to/foo"
     },
-
     "file:///path/to/foo": {
       name: null,
       type: "local",
