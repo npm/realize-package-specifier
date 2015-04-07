@@ -1,6 +1,6 @@
 {
   "name": "realize-package-specifier",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "Like npm-package-arg, but more so, producing full file paths and differentiating local tar and directory sources.",
   "main": "index.js",
   "scripts": {
