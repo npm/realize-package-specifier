@@ -19,6 +19,6 @@
   },
   "devDependencies": {
     "require-inject": "^1.1.0",
-    "tap": "^0.4.12"
+    "tap": "^5.7.1"
   }
 }
