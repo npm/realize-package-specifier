@@ -33,9 +33,7 @@ module.exports = function (spec, where, cb) {
         dep.name = null
       }
     }
-    if (dep.type == "local" || dep.type == "directory") {
-      dep.spec = path.resolve(specpath)
-    }
+    if (dep.type == "local" || dep.type == "directory") dep.spec = specpath
     cb(null, dep)
   }
 }
